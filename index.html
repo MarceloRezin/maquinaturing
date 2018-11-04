@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Máquina de Turing</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="./gerencia-tabela.js"></script>
+	</head>
+	<body>
+		<h2>Teste</h2>
+		<input type="button" value="ADD" onclick="addLinha()">
+		<input type="button" value="REM" onclick="removeLinha()">
+		<input type="button" value="ADD2" onclick="addColuna()">
+		<input type="button" value="REM2" onclick="removeColuna()">
+
+		<table class="table table-striped" id="tabelaTransicoes" flex>
+			<thead flex class="thead-dark">
+				<tr id="cabecalho">
+					<th scope="col">Q</th>
+					<th scope="col"><input type="text"></th>
+				</tr>
+  		</thead>
+			<tbody id="linhas">
+				<tr>
+					<th scope="row"><input type="text" value="1"></th>
+					<td><input type="text"></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
