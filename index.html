@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style>
+			html, body{
+				height: 100%!important;
+			}
+		</style>
 		<title>Máquina de Turing</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script src="./gerencia-tabela.js"></script>
 	</head>
-	<body>
-		<h2>Teste</h2>
-		<input type="button" value="ADD" onclick="addLinha()">
-		<input type="button" value="REM" onclick="removeLinha()">
-		<input type="button" value="ADD2" onclick="addColuna()">
-		<input type="button" value="REM2" onclick="removeColuna()">
-
-		<table class="table table-striped" id="tabelaTransicoes" flex>
-			<thead flex class="thead-dark">
-				<tr id="cabecalho">
-					<th scope="col">Q</th>
-					<th scope="col"><input type="text"></th>
-				</tr>
-  		</thead>
-			<tbody id="linhas">
-				<tr>
-					<th scope="row"><input type="text" value="1"></th>
-					<td><input type="text"></td>
-				</tr>
-			</tbody>
+	<body style="max-width: 100%">
+		<table class="table table-striped"  id="tabelaTransicoes">
+				<thead flex class="thead-dark">
+					<tr id="cabecalho">
+						<th scope="col">Q</th>
+						<th scope="col"><input type="text"></th>
+					</tr>
+				</thead>
+				<tbody id="linhas">
+					<tr>
+						<th scope="row"><input type="text" value="1"></th>
+						<td><input type="text"></td>
+					</tr>
+				</tbody>
 		</table>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="showOpcoes('opcoesAdd')">
+				<i class="material-icons">add</i>
+			</button>
+			<div id="opcoesAdd" class="dropdown-menu dropdown-menu-right">
+				<button class="dropdown-item" type="button" onclick="addLinha('opcoesAdd')">Linha</button>
+				<button class="dropdown-item" type="button" onclick="addColuna('opcoesAdd')">Coluna</button>
+			</div>
+
+			<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="showOpcoes('opcoesRem')">
+				<i class="material-icons">delete</i>
+			</button>
+			<div id="opcoesRem" class="dropdown-menu dropdown-menu-right">
+				<button class="dropdown-item" type="button" onclick="removeLinha('opcoesRem')">Linha</button>
+				<button class="dropdown-item" type="button" onclick="removeColuna('opcoesRem')">Coluna</button>
+			</div>
+		</div>
 	</body>
 </html>

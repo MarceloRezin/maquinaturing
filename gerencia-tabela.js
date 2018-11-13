@@ -1,4 +1,6 @@
-function addLinha() {
+function addLinha(opcoes) {
+    showOpcoes(opcoes);
+
     var linhas =  document.getElementById('linhas');
     var cabecalho =  document.getElementById('cabecalho');
 
@@ -38,7 +40,8 @@ function addLinha() {
     linhas.appendChild(novaLinha);
 }
 
-function removeLinha() {
+function removeLinha(opcoes) {
+    showOpcoes(opcoes);
     var linhas =  document.getElementById('linhas');
 
     if(linhas.childElementCount > 0){ //Se tem algo pra apagar
@@ -46,7 +49,8 @@ function removeLinha() {
     }
 }
 
-function addColuna() {
+function addColuna(opcoes) {
+    showOpcoes(opcoes);
     //Adiciona a celuna no cabecalho
     var cabecalho =  document.getElementById('cabecalho');
 
@@ -67,7 +71,8 @@ function addColuna() {
     }
 }
 
-function removeColuna() {
+function removeColuna(opcoes) {
+    showOpcoes(opcoes);
     //Remove a ultima celula do cabecalho
     var cabecalho =  document.getElementById('cabecalho');
 
@@ -82,4 +87,14 @@ function removeColuna() {
             linha.removeChild(linha.children[linha.childElementCount -1])  ;
         }
     }
+}
+
+function showOpcoes(opcoes){
+    var opcao =  document.getElementById(opcoes);
+    
+    if(opcao.style.display == 'inline'){
+        opcao.style.display = 'none';
+    }else{
+        opcao.style.display = 'inline';
+    }  
 }
