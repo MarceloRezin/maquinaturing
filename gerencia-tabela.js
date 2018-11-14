@@ -124,4 +124,47 @@ function startListenner(){
     document.dispatchEvent(e);
 }
 
+function getMatriz(){
+    let matriz = new Map();
+
+    let cabecalho = document.getElementById('cabecalho');
+    let linhas = document.getElementById('linhas');
+
+    let chavesCabecalho = [];
+
+    for (let i = 1; i < cabecalho.childElementCount; i++) {
+        chavesCabecalho.push(cabecalho.cells[i].children[0].value)
+    }
+
+    let chavesLinhas = [];
+
+    for (let i = 0; i < linhas.childElementCount; i++) {
+        chavesLinhas.push(linhas.children[i].cells[0].children[0].value); 
+    }
+
+    for (let i = 0; i < linhas.childElementCount; i++) {
+    
+        let chaveLinha = chavesLinhas[i];
+        let coluna = new Map();
+
+        for (let j = 1; j < cabecalho.childElementCount; j++) {
+            let chaveColuna = chavesCabecalho[j-1];
+            
+            let estadoSplit = linhas.children[i].cells[j].children[0].value.split(',');
+
+            let estado = {
+                proximoEstado: estadoSplit[0],
+                novoCaracter: estadoSplit[1],
+                direcao: estadoSplit[2]
+            }
+
+            coluna.set(chaveColuna, estado); 
+        }
+
+        matriz.set(chaveLinha, coluna);
+    }
+
+    return matriz;
+}
+
 startListenner();
