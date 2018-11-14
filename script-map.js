@@ -9,6 +9,7 @@ function init(){
 }
 
 function carregar(){
+	fita.clear();
 	let texto = document.getElementById('tam1').value;
 	let textoSplit = texto.split('');
 	let posicao = centro;
