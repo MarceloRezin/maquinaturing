@@ -90,11 +90,38 @@ function removeColuna(opcoes) {
 }
 
 function showOpcoes(opcoes){
-    var opcao =  document.getElementById(opcoes);
-    
-    if(opcao.style.display == 'inline'){
-        opcao.style.display = 'none';
-    }else{
-        opcao.style.display = 'inline';
-    }  
+    if(opcoes){
+        var opcao = document.getElementById(opcoes);
+
+        if(opcao.style.display == 'inline'){
+            opcao.style.display = 'none';
+        }else{
+            opcao.style.display = 'inline';
+        }     
+    }
 }
+
+function startListenner(){
+    document.addEventListener('keydown', function (e) {
+        if(e.altKey){
+            if (e.keyCode === 38) {
+                removeLinha();
+            }else if (e.keyCode === 40) {
+                addLinha();
+            }else if (e.keyCode === 37) {
+                removeColuna();
+            }else if (e.keyCode === 39) {
+                addColuna();
+            }
+        }
+    });
+
+    var e = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true
+    });
+    document.dispatchEvent(e);
+}
+
+startListenner();
