@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Fita com Canvas</title>
+<meta charset="UTF-8">
+<script type="text/javascript" src="script2.js"></script>
+<style>
+	.centraliza{
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+	}
+	</style>
+</head>
+<body><!-- onload="carregar();">-->
+<form name="form1">
+<Digite aqui quantas casas desejas criar<br>
+<input type="text" name="tam1" width="10"><br>
+<!--<input type="button" value="ok" onclick="carregar(document.form1.tam1.value)"><br>-->
+<input type="button" value="ok" onclick="carregar()"><br>
+<input type="button" value="ESQ" onclick="mover()"><br>
+<input type="button" value="DIR" onclick="moverD()"><br>
+</form>
+<div>
+<canvas id="fita" width="1350" height="62"></canvas>
+</div>
+<div>
+<canvas class="centraliza" style="margin-top: -2.5%;" id="ponteiro" width="40" height="50"></canvas>
+</div>
+
+</body>
+</html>
