@@ -168,10 +168,19 @@ function getMatriz(){
     for (let i = 0; i < linhas.childElementCount; i++) {
     
         let coluna = new Map();
+        let estadoAnteriorFinal;
         for (let j = 1; j < cabecalho.childElementCount; j++) {
 
             try{
                 let estado = getEstado(chavesLinhas, chavesCabecalho, linhas.children[i].cells[j].children[0].value);
+
+                if(j == 1){
+                    estadoAnteriorFinal = estado.isFinal;
+                }else{
+                    if(estado.isFinal && !estadoAnteriorFinal){
+                        throw 'Transição incompleta'; 
+                    }
+                }
 
                 coluna.set(chavesCabecalho[j - 1], estado); 
             }catch(e){
@@ -186,6 +195,12 @@ function getMatriz(){
 }
 
 function getEstado(chavesLinhas, chavesCabecalho, celula){
+    celula = celula.trim();
+
+    if(!celula){
+        return {isFinal: true};
+    }
+
     let estadoSplit = celula.split(',');
 
     if(estadoSplit.length == 3){
