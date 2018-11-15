@@ -3,21 +3,26 @@ const qtdQuadrado = 25;
 const centro = 660;
 
 function init(){
-	carregar();
 	renderFita();
 	renderTriangulo();
 }
 
-function carregar(){
+function carregarFita(){
 	fita.clear();
-	let texto = document.getElementById('tam1').value;
-	let textoSplit = texto.split('');
+	let entrada = document.getElementById('entrada').value;
+
+	if (!entrada){
+		throw 'Erro: Você deve informar um entrada!';
+	}
+
+	let entradaSplit = entrada.split('');
 	let posicao = centro;
-    for(let i=0; i<texto.length; i++, posicao+=45){
-		fita.set(posicao, textoSplit[i]);
-    }
+	for (let i = 0; i <entrada.length; i++, posicao+=45){
+		fita.set(posicao, entradaSplit[i]);
+	}
 	renderFita();
 }
+
 function renderFita(){
 
 	let canvasFita = document.getElementById('fita');
@@ -27,13 +32,13 @@ function renderFita(){
     let x = 210;
     let y = 7;
 	let tamanhoFita = qtdQuadrado * 45;
-    context.font = '25px Calibri';
+	context.font = '25px DejaVu Sans Mono';
     var aux = x;
     for(x; x<tamanhoFita; x+=45){
 		context.rect(x, y, 40, 40);
 		let letra = fita.get(x);
 		if(letra){
-			context.strokeText(letra, x+14, 34);
+			context.strokeText(letra, x+13, 34);
 		}
    }
    context.stroke();
@@ -103,15 +108,3 @@ function renderTriangulo(){
 }
 
 init();
-
-
-
-
-
-
-
-
-
-
-
-
