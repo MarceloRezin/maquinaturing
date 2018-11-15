@@ -5,14 +5,38 @@
 			html, body{
 				height: 100%!important;
 			}
+			.centraliza{
+				padding-left: 0;
+				padding-right: 0;
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
 		</style>
 		<title>Máquina de Turing</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script src="./gerencia-tabela.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	</head>
-	<body style="max-width: 100%">
+	<body>
+		<div>
+			<canvas id="fita" width="1350" height="62"></canvas>
+		</div>
+		<div class="mb-4">
+			<canvas class="centraliza" style="margin-top: -2.5%;" id="triangulo" width="55" height="50"></canvas>
+		</div>
+		<div class="input-group mb-4 col col-lg-5 centraliza">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1"><i class="material-icons">arrow_right_alt</i></span>
+			</div>
+			<input type="text" class="form-control" placeholder="Entrada" aria-label="Entrada" id="entrada">
+			<input type="text" class="form-control" placeholder="Estado Inical" aria-label="Estado Inical" id="inicial">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="button" onclick="carregarMaquina()">Carregar</button>
+			</div>
+		</div>
 		<table class="table table-striped"  id="tabelaTransicoes">
 				<thead flex class="thead-dark">
 					<tr id="cabecalho">
@@ -44,5 +68,9 @@
 				<button class="dropdown-item" type="button" onclick="removeColuna('opcoesRem')">Coluna (alt + ←)</button>
 			</div>
 		</div>
+		<script src="./gerencia-tabela.js"></script>
+		<script src="gerencia-fita.js"></script>
+		<script src="maquina-turing.js"></script>
+		<script src="toast.js"></script>
 	</body>
 </html>
