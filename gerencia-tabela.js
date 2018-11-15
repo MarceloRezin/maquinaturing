@@ -133,38 +133,89 @@ function getMatriz(){
     let chavesCabecalho = [];
 
     for (let i = 1; i < cabecalho.childElementCount; i++) {
-        chavesCabecalho.push(cabecalho.cells[i].children[0].value)
+        let celula = cabecalho.cells[i].children[0].value.trim();
+
+        if(celula){
+            if(!chavesCabecalho.includes(celula)){
+                if(celula.length == 1){
+                    chavesCabecalho.push(celula);
+                    continue;
+                }
+                throw 'Erro: Celula com mais de um caracter na ' + i + 'ª coluna do cabeçalho';
+            }
+            throw 'Erro: Celula repetida na ' + i + 'ª coluna do cabeçalho';
+        }
+        throw 'Erro: Celula vazia na ' + i + 'ª coluna do cabeçalho';
     }
 
     let chavesLinhas = [];
 
     for (let i = 0; i < linhas.childElementCount; i++) {
-        chavesLinhas.push(linhas.children[i].cells[0].children[0].value); 
+        let celula = linhas.children[i].cells[0].children[0].value.trim();
+
+        if(celula){
+            if(!chavesLinhas.includes(celula)){
+                chavesLinhas.push(celula); 
+                continue;
+            }
+
+            throw 'Erro: Celula repetida na ' + (i + 1) + 'ª linha na coluna de estados';
+        }
+        
+        throw 'Erro: Celula vazia na ' + (i+1) + 'ª linha na coluna de estados';
     }
 
     for (let i = 0; i < linhas.childElementCount; i++) {
     
-        let chaveLinha = chavesLinhas[i];
         let coluna = new Map();
-
         for (let j = 1; j < cabecalho.childElementCount; j++) {
-            let chaveColuna = chavesCabecalho[j-1];
-            
-            let estadoSplit = linhas.children[i].cells[j].children[0].value.split(',');
 
-            let estado = {
-                proximoEstado: estadoSplit[0],
-                novoCaracter: estadoSplit[1],
-                direcao: estadoSplit[2]
+            try{
+                let estado = getEstado(chavesLinhas, chavesCabecalho, linhas.children[i].cells[j].children[0].value);
+
+                coluna.set(chavesCabecalho[j - 1], estado); 
+            }catch(e){
+                throw 'Erro: ' + e + '. Em: E -> ' + chavesLinhas[i] + ' | C -> ' + chavesCabecalho[j - 1];
             }
-
-            coluna.set(chaveColuna, estado); 
         }
 
-        matriz.set(chaveLinha, coluna);
+        matriz.set(chavesLinhas[i], coluna);
     }
 
     return matriz;
+}
+
+function getEstado(chavesLinhas, chavesCabecalho, celula){
+    let estadoSplit = celula.split(',');
+
+    if(estadoSplit.length == 3){
+        let estado = {};
+
+        let proximoEstado = estadoSplit[0].trim();
+        if(chavesLinhas.includes(proximoEstado)){
+            estado.proximoEstado = proximoEstado;
+
+            let novoCaracter = estadoSplit[1].trim();
+            if(chavesCabecalho.includes(novoCaracter)){
+                estado.novoCaracter = novoCaracter;
+
+                let direcao = estadoSplit[2].trim().toUpperCase();
+                if(direcao === 'E' || direcao === 'D'){
+                    estado.direcao = direcao;
+
+                    return estado;
+                }
+
+                throw 'Foi informado uma direção inválida'
+            }
+
+            throw 'Foi informado um caracter inexistente'
+        }
+
+        throw 'Foi informado um estado inexistente'
+    }
+
+    throw 'Transição incompleta';
 }
 
 startListenner();
