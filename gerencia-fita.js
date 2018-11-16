@@ -43,7 +43,7 @@ function renderFita(){
    }
    context.stroke();
 }
-function moverEsquerda(){
+function moverDireita(){
 		let posicoes = Array.from(fita.keys());
 		
 		posicoes.sort(function comparar(a, b) {
@@ -67,7 +67,7 @@ function moverEsquerda(){
 		
 		renderFita();
 }
-function moverDireita(){
+function moverEsquerda(){
 	let posicoes = Array.from(fita.keys());
 		
 		posicoes.sort(function comparar(a, b) {
@@ -105,6 +105,23 @@ function renderTriangulo(){
 	context.lineTo(40, 40);
 	context.fill();
 	context.stroke();
+}
+
+function getCaracter(){
+	let caracter = fita.get(660);
+
+	if(!caracter){
+		return '_';
+	}
+	return caracter;
+}
+
+function mover(direcao){
+	if(direcao === 'E'){
+		moverEsquerda();
+	}else{
+		moverDireita();
+	}
 }
 
 init();
