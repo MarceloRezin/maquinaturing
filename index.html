@@ -37,10 +37,10 @@
 				</a>
 			</li>
 		</ul>
-		<div>
+		<div id="divCanvas">
 			<canvas class="centraliza" id="fita" width="1350" height="62"></canvas>
 		</div>
-		<div class="mb-4">
+		<div class="mb-4" id="divTriangulo">
 			<canvas class="centraliza" style="margin-top: -2.5%;" id="triangulo" width="40" height="50"></canvas>
 			<div style="text-align: center">
 				<h4 >Estado atual: </h4><h4 id="estadoAtual"></h4>
@@ -133,6 +133,7 @@
 					<div>
 						<p>Para executar a máquina basta informa uma entrada no campo de entrada e o estado inicial, em seguida clique no botão <i>Carregar</i>. Após carregar a máquina, você pode controlar o seu fluxo com os botões de status: <i class="material-icons">play_arrow</i><i class="material-icons">pause</i><i class="material-icons">stop</i><i class="material-icons">skip_next</i><br>
 						Em baixo dos botões de status é possível visualizar o status atual da máquina. Anteção: Sempre que a máquina estiver com o status <i>parada</i>, é necessário carregar a máquina novamente. <br>
+						Para ver o resultado completo da execução da máquina basta clicar na fita. <br>
 						É possível configurar o delay de execução da máquina por meio da opção <i>Configurações</i> na barra no topo da página. O valor é em ms e o padrão é 1000ms.<br> 
 						</p>
 					</div>
@@ -143,27 +144,57 @@
 				</div>
 			</div>
 		</div>
+		<!-- FIM MODAL AJUDA -->
+
+		<!-- INICIO MODAL REAULTADO -->
+		<div id="modalResultado" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Resultado</h2>
+					<span class="close">&times;</span>
+				</div>
+				<div class="modal-body">
+					<h4 id="resultado" style="word-wrap: break-word;"></h4>
+				</div>
+			</div>
+		</div>
+		<!-- FIM MODAL RESULTADO -->
 		<script>
 			var modal = document.getElementById('modalAjuda');
+			var modalResultado = document.getElementById('modalResultado');
 			var btn = document.getElementById("btnModalAjuda");
-			var span = document.getElementsByClassName("close")[0];
+			var fita = document.getElementById("divCanvas");
+			var triangulo = document.getElementById("divTriangulo");
+			var close = document.getElementsByClassName("close");
 
 			btn.onclick = function () {
 				modal.style.display = "block";
 			}
 
-			span.onclick = function () {
-				modal.style.display = "none";
+			fita.onclick = function(){
+				modalResultado.style.display = "block";
+				document.getElementById('resultado').innerHTML = getResultado();
+			}
+
+			triangulo.onclick = function(){
+				modalResultado.style.display = "block";
+				document.getElementById('resultado').innerHTML = getResultado();
+			}
+
+			for(let i=0; i<close.length; i++){
+				close[i].onclick = function () {
+					modal.style.display = "none";
+					modalResultado.style.display = "none";
+				}
 			}
 
 			window.onclick = function (event) {
-				if (event.target == modal) {
+				if (event.target == modal || event.target == modalResultado) {
 					modal.style.display = "none";
+					modalResultado.style.display = "none";
 				}
 			}
 		</script>
-		<!-- FIM MODAL AJUDA -->
-
 		<script src="gerencia-tabela.js"></script>
 		<script src="gerencia-fita.js"></script>
 		<script src="maquina-turing.js"></script>

@@ -161,3 +161,14 @@ function getDelayMaquina(){
 
     return delay;
 }
+
+function getResultado(){
+    if(stop){
+        let fita = toStringFita();
+        if(fita){
+            return fita;
+        }
+    }
+
+    return 'Sem resultados.';
+}

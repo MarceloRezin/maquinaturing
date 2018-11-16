@@ -108,12 +108,7 @@ function renderTriangulo(){
 }
 
 function getCaracter(){
-	let caracter = fita.get(660);
-
-	if(!caracter || !caracter.trim()){
-		return '_';
-	}
-	return caracter;
+	return normalizeCaracter(fita.get(660));
 }
 
 function mover(direcao){
@@ -122,6 +117,37 @@ function mover(direcao){
 	}else{
 		moverDireita();
 	}
+}
+
+function normalizeCaracter(caracter){
+	if(!caracter || !caracter.trim()){
+		return '_';
+	}
+	return caracter;
+}
+
+function toStringFita() {
+	let posicoes = Array.from(fita.keys());
+
+	posicoes.sort(function comparar(a, b) {
+		if (a < b) {
+			return -1;
+		}
+		if (a > b) {
+			return 1;
+		}
+
+		return 0;
+	});
+
+	let str = '';
+	for (let i = 0; i < posicoes.length; i++) {
+		let posicao = posicoes[i];
+
+		str += normalizeCaracter(fita.get(posicao));
+	}
+
+	return str;
 }
 
 init();
