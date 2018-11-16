@@ -11,11 +11,15 @@ function carregarMaquina(){
 
         if (!estado) {
             erroToast('Erro: Você deve informar o estado inical!');
+            stop = true;
+            updateStatus();
             return;
         }
 
         if (!matriz.has(estado)) {
             erroToast('Erro: O estado inicial informado não existe na tabela de transições!');
+            stop = true;
+            updateStatus();
             return;
         }
 
@@ -23,8 +27,12 @@ function carregarMaquina(){
         stop = false;
         pause = false;
         play = false;
+
+        updateStatus();
     }catch(e){
         erroToast(e);
+        stop = true;
+        updateStatus();
     }
 }
 
@@ -40,7 +48,8 @@ function realizarPasso(){
         if(transicao.isVazio){
             if (transicao.isFinal){
                 stop = true;
-                sucessoToast('Execução finalizada!')
+                sucessoToast('Execução finalizada!');
+                updateStatus();
                 return;
             }
 
@@ -74,6 +83,8 @@ function run(){
     if (pause) {
         pause = false;
         play = false;
+
+        updateStatus();
         return;
     }
 
@@ -84,13 +95,16 @@ function run(){
     try{
         realizarPasso();
     }catch(e){
-        erroToast('Erro: ' + e)
+        erroToast('Erro: ' + e);
+        stop = true;
+        updateStatus();
     }
 }
 
 function runAll() {
     if(pause){
         pause = false;
+        updateStatus();
         return;
     }
 
@@ -99,8 +113,11 @@ function runAll() {
     }
 
     play = true;
+    updateStatus();
     execucaoAutomatica().then().catch(function (e) {
-        erroToast('Erro: ' + e)
+        erroToast('Erro: ' + e);
+        stop = true;
+        updateStatus();
     });
 }
 
@@ -111,8 +128,26 @@ function setEstadoAtual(novoEstado){
 
 function pauseMaquina(){
     pause = !pause;
+    updateStatus();
 }
 
 function stopMaquina(){
     stop = true;
+    updateStatus();
+}
+
+function updateStatus(){
+    let estado = '';
+    
+    if (stop) {
+        estado = 'Parada';
+    } else if (pause) {
+        estado = 'Pausada';
+    } else if (play) {
+        estado = 'Rodando';
+    } else {
+        estado = 'Pronta';
+    }
+
+    document.getElementById('statusMaquina').innerHTML = estado;
 }
