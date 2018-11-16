@@ -5,12 +5,17 @@
 			html, body{
 				height: 100%!important;
 			}
+
+		h4{
+			display: inline;
+		}
 			.centraliza{
 				padding-left: 0;
 				padding-right: 0;
 				margin-left: auto;
 				margin-right: auto;
 				display: block;
+				justify-content: center!important;
 			}
 		</style>
 		<title>Máquina de Turing</title>
@@ -22,22 +27,41 @@
 	</head>
 	<body>
 		<div>
-			<canvas id="fita" width="1350" height="62"></canvas>
+			<canvas class="centraliza" id="fita" width="1350" height="62"></canvas>
 		</div>
 		<div class="mb-4">
-			<canvas class="centraliza" style="margin-top: -2.5%;" id="triangulo" width="55" height="50"></canvas>
-		</div>
-		<div class="input-group mb-4 col col-lg-5 centraliza">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon1"><i class="material-icons">arrow_right_alt</i></span>
-			</div>
-			<input type="text" class="form-control" placeholder="Entrada" aria-label="Entrada" id="entrada">
-			<input type="text" class="form-control" placeholder="Estado Inical" aria-label="Estado Inical" id="inicial">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="button" onclick="carregarMaquina()">Carregar</button>
+			<canvas class="centraliza" style="margin-top: -2.5%;" id="triangulo" width="40" height="50"></canvas>
+			<div style="text-align: center">
+				<h4 >Estado atual: </h4><h4 id="estadoAtual"></h4>
 			</div>
 		</div>
-		<table class="table table-striped"  id="tabelaTransicoes">
+			<div class="input-group mb-3 col col-lg-8 centraliza">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1"><i class="material-icons">arrow_right_alt</i></span>
+				</div>
+				<input type="text" class="form-control" placeholder="Entrada" aria-label="Entrada" id="entrada">
+				<input type="text" class="form-control" style="max-width: 15%;" placeholder="Estado Inical" aria-label="Estado Inical" id="inicial">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="button" onclick="carregarMaquina()">Carregar</button>
+				</div>
+			</div>
+			<div class="btn-toolbar centraliza mb-5" role="toolbar" aria-label="Toolbar with button groups">
+				<div class="btn-group mr-2" role="group" aria-label="First group">
+					<button class="btn btn-dark" type="button" onclick="run()">
+						<i class="material-icons">play_arrow</i>
+					</button>
+					<button class="btn btn-dark" type="button" onclick="carregarMaquina()">
+						<i class="material-icons">pause</i>
+					</button>
+					<button class="btn btn-dark" type="button" onclick="carregarMaquina()">
+						<i class="material-icons">stop</i>
+					</button>
+				</div>
+			</div>
+
+			<input id="teste" value="1000">
+
+		<table class="table table-striped" id="tabelaTransicoes">
 				<thead flex class="thead-dark">
 					<tr id="cabecalho">
 						<th scope="col">Q</th>
