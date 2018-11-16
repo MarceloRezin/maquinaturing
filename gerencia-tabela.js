@@ -248,8 +248,8 @@ function importTabela(tabela){
         while(tabela.length - 1 > linhas.childElementCount) {
             addLinha();
         }
-    }else if(tabela.length < linhas.childElementCount){
-        while (tabela.length < linhas.childElementCount) {
+    }else if(tabela.length -1 < linhas.childElementCount){
+        while (tabela.length -1 < linhas.childElementCount) {
             removeLinha();
         }
     }
