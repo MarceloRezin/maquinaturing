@@ -108,9 +108,9 @@ function renderTriangulo(){
 }
 
 function getCaracter(){
-	let caracter = fita.get(660).trim();
+	let caracter = fita.get(660);
 
-	if(!caracter){
+	if(!caracter || !caracter.trim()){
 		return '_';
 	}
 	return caracter;
