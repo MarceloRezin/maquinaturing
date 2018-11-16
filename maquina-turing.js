@@ -60,7 +60,9 @@ function execucaoAutomatica(){
             function () {
                 try{
                     realizarPasso();
-                    execucaoAutomatica().then().catch(reject);
+                    if(!stop){
+                        execucaoAutomatica().then().catch(reject);
+                    }
                 }catch(e){
                     reject(e);
                 }
