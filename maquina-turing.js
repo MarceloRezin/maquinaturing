@@ -53,12 +53,33 @@ function realizarPasso(){
     }
 }
 
+function execucaoAutomatica(){
+    return new Promise(function(resolve, reject) {
+        
+        window.setTimeout(
+            function () {
+                try{
+                    realizarPasso();
+                    execucaoAutomatica().then().catch(reject);
+                }catch(e){
+                    reject(e);
+                }
+            }, document.getElementById('teste').value);
+    });
+}
+
 function run(){
     try{
         realizarPasso();
     }catch(e){
         erroToast('Erro: ' + e)
     }
+}
+
+function runAll() {
+    execucaoAutomatica().then().catch(function (e) {
+        erroToast('Erro: ' + e)
+    });
 }
 
 function setEstadoAtual(novoEstado){
