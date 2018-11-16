@@ -212,6 +212,9 @@ function getEstado(chavesLinhas, chavesCabecalho, celula){
 
             let novoCaracter = estadoSplit[1].trim();
             if(chavesCabecalho.includes(novoCaracter)){
+                if (novoCaracter === '_') {
+                    novoCaracter = ' ';
+                }
                 estado.novoCaracter = novoCaracter;
 
                 let direcao = estadoSplit[2].trim().toUpperCase();
