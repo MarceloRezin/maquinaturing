@@ -75,7 +75,7 @@ function execucaoAutomatica(){
                 }catch(e){
                     reject(e);
                 }
-            }, document.getElementById('teste').value);
+        }, getDelayMaquina());
     });
 }
 
@@ -150,4 +150,14 @@ function updateStatus(){
     }
 
     document.getElementById('statusMaquina').innerHTML = estado;
+}
+
+function getDelayMaquina(){
+    let delay = document.getElementById('delayMaquina').value;
+
+    if(!delay || !delay.trim() || delay < 49){
+        delay = 1000;
+    }
+
+    return delay;
 }
