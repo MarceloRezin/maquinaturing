@@ -236,4 +236,134 @@ function getEstado(chavesLinhas, chavesCabecalho, celula){
     throw 'Transição incompleta';
 }
 
+function importTabela(tabela){
+
+    let linhas = document.getElementById('linhas');
+
+    if(tabela.length < 2){
+        return;
+    }
+
+    if(tabela.length -1 > linhas.childElementCount){
+        while(tabela.length - 1 > linhas.childElementCount) {
+            addLinha();
+        }
+    }else if(tabela.length < linhas.childElementCount){
+        while (tabela.length < linhas.childElementCount) {
+            removeLinha();
+        }
+    }
+
+    let cabecalho = document.getElementById('cabecalho');
+
+    if(tabela[0].length > cabecalho.childElementCount){
+        while (tabela[0].length > cabecalho.childElementCount) {
+            addColuna();
+        }
+    }else if(tabela[0].length < cabecalho.childElementCount){
+        while (tabela[0].length < cabecalho.childElementCount) {
+            removeColuna();
+        }
+    }
+
+    for (let i = 1; i < cabecalho.childElementCount; i++) {
+        cabecalho.cells[i].children[0].value = tabela[0][i];
+    }
+
+    for (let i = 0; i < linhas.childElementCount; i++) {
+        for (let j = 0; j < cabecalho.childElementCount; j++) {
+            linhas.children[i].cells[j].children[0].value = tabela[i+1][j];
+        }
+    }
+}
+
+function importByNome(nome){
+
+    if(nome === 'somar'){
+        let soma = [6];
+        soma[0] = ['Q', '*', '_', '>'];
+        soma[1] = ['>', '', '', '0, >, D'];
+        soma[2] = ['0', '0, *, D', '1, *, D', ''];
+        soma[3] = ['1', '1, *, D', '2, _, E', ''];
+        soma[4] = ['2', 'FIM, _, E', '', ''];
+        soma[5] = ['FIM', '', '', ''];
+
+        importTabela(soma);
+    }else if (nome === 'subtrair'){
+        let soma = [8];
+
+        soma[0] = ['Q', '*', '_', '>'];
+        soma[1] = ['>', '', '', '0, >, D'];
+        soma[2] = ['0', '0, *, D', '1, _, D', ''];
+        soma[3] = ['1', '1, *, D', '2, _, E', ''];
+        soma[4] = ['2', '3, _, E', 'FIM, _, E', ''];
+        soma[5] = ['3', '3, *, E', '3, _, E', '4, >, D'];
+        soma[6] = ['4', '0, _, D', '4, _, D', ''];
+        soma[7] = ['FIM', '', '', ''];
+
+        importTabela(soma);
+    }else if (nome === 'multiplicar'){
+        let soma = [14];
+
+        soma[0] = ['Q', '*', '_', 'K', 'Y', '>'];
+        soma[1] = ['>', '', '', '', '', '0, >, D'];
+        soma[2] = ['0', '0, *, D', '1, _, D', '', '', ''];
+        soma[3] = ['1', '1, *, D', '2, _, E', '2, K, E', '', ''];
+        soma[4] = ['2', '3, K, E', '8, _, D', '', '', ''];
+        soma[5] = ['3', '3, *, E', '3, _, E', '3, K, E', '4, *, D', '4, >, D'];
+        soma[6] = ['4', '5, Y, D', '1, _, D', '', '', ''];
+        soma[7] = ['5', '5, *, D', '6, _, D', '', '', ''];
+        soma[8] = ['6', '6, *, D', '7, _, D', '6, K, D', '', ''];
+        soma[9] = ['7', '7, *, D', '3, *, E', '', '', ''];
+        soma[10] = ['8', '', '9, >, E', '8, _, D', '', ''];
+        soma[11] = ['9', '9, _, E', '9, _, E', '', '', '10, _, D'];
+        soma[12] = ['10', '', '10, _, D', '', '', 'FIM, >, D'];
+        soma[13] = ['FIM', '', '', '', '', ''];
+
+        importTabela(soma);
+    }else if (nome === 'dividir'){
+        let soma = [19];
+
+        soma[0] = ['Q', '*', '_', 'Y', '>'];
+        soma[1] = ['>', '', '', '', '0, >, D'];
+        soma[2] = ['0', '0, *, D', '1, _, D', '', ''];
+        soma[3] = ['1', '1, *, D', '2, _, E', '2, Y, E', ''];
+        soma[4] = ['2', '3, Y, E', '5, _, D', '', ''];
+        soma[5] = ['3', '3, *, E', '3, _, E', '', '4, _, D'];
+        soma[6] = ['4', '0, >, D', '8, _, D', '', ''];
+        soma[7] = ['5', '', '6, _, D', '5, *, D', ''];
+        soma[8] = ['6', '6, *, D', '7, *, E', '', ''];
+        soma[9] = ['7', '7, *, E', '2, _, E', '', ''];
+        soma[10] = ['8', '8, _, D', '', '9, _, D', '10, _, D'];
+        soma[11] = ['9', '', '10, >, D', '10, >, D', ''];
+        soma[12] = ['10', 'FIM, *, E', '11, _, D', '10, Y, D', ''];
+        soma[13] = ['11', '11, *, D', '12, _, D', '', ''];
+        soma[14] = ['12', '12, *, D', '13, *, E', '', ''];
+        soma[15] = ['13', '13, *, E', '13, _, E', '13, Y, E', '15, _, D'];
+        soma[16] = ['14', 'FIM, *, D', '', '8, Y, E', ''];
+        soma[17] = ['15', '', 'FIM, >, D', '', '', ''];
+        soma[18] = ['FIM', '', '', '', '', ''];
+
+        importTabela(soma);
+    }else if (nome === 'igualar'){
+        let soma = [13];
+
+        soma[0] = ['Q', '*', '_', 'Y', '>'];
+        soma[1] = ['>', '', '', '', '0, >, D'];
+        soma[2] = ['0', '1, Y, D', '7, _, D', '', ''];
+        soma[3] = ['1', '2, *, D', '6, _, D', '2, Y, E', ''];
+        soma[4] = ['2', '2, *, D', '3, _, D', '', ''];
+        soma[5] = ['3', '4, Y, E', '4, Y, E', '3, Y, D', ''];
+        soma[6] = ['4', '5, *, E', '4, _, E', '4, Y, E', ''];
+        soma[7] = ['5', '5, *, E', '5, _, E', '0, Y, D', ''];
+        soma[8] = ['6', '7, Y, D', '7, Y, D', '6, Y, D', ''];
+        soma[9] = ['7', '7, *, D', '8, _, E', '', ''];
+        soma[10] = ['8', '8, _, E', '8, _, E', '8, *, E', '9, >, D'];
+        soma[11] = ['9', 'FIM, *, E', '', '', ''];
+        soma[12] = ['FIM', '', '', '', '', ''];
+
+        importTabela(soma);
+    }
+}
+
 startListenner();
