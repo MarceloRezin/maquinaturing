@@ -1,11 +1,10 @@
 var matriz;
 var estado;
+var play = false; //Verdadeiro quando a máquina está executando em modo automático
 var pause = false;
 var stop = false;
 
-
 function carregarMaquina(){
-
     try{
         matriz = getMatriz();
         setEstadoAtual(document.getElementById('inicial').value);
@@ -22,14 +21,15 @@ function carregarMaquina(){
 
         carregarFita();
         stop = false;
+        pause = false;
+        play = false;
     }catch(e){
         erroToast(e);
     }
 }
 
-//Retorna true caso chegue em um estado final
 function realizarPasso(){
-    if (matriz && estado && fita && !stop) {
+    if (matriz && estado && fita && !stop && !pause) {
         let linha = matriz.get(estado);
         let transicao = linha.get(getCaracter());
 
@@ -60,7 +60,7 @@ function execucaoAutomatica(){
             function () {
                 try{
                     realizarPasso();
-                    if(!stop){
+                    if(!stop && play){
                         execucaoAutomatica().then().catch(reject);
                     }
                 }catch(e){
@@ -71,6 +71,16 @@ function execucaoAutomatica(){
 }
 
 function run(){
+    if (pause) {
+        pause = false;
+        play = false;
+        return;
+    }
+
+    if (play) { // Já está executando em modo automático
+        return;
+    }
+
     try{
         realizarPasso();
     }catch(e){
@@ -79,6 +89,16 @@ function run(){
 }
 
 function runAll() {
+    if(pause){
+        pause = false;
+        return;
+    }
+
+    if(play){
+        return;
+    }
+
+    play = true;
     execucaoAutomatica().then().catch(function (e) {
         erroToast('Erro: ' + e)
     });
@@ -87,4 +107,12 @@ function runAll() {
 function setEstadoAtual(novoEstado){
     estado = novoEstado;
     document.getElementById('estadoAtual').innerHTML = estado;
+}
+
+function pauseMaquina(){
+    pause = !pause;
+}
+
+function stopMaquina(){
+    stop = true;
 }
