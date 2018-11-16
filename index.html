@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	</head>
 	<body>
-		<ul>
+		<ul class="mb-2">
 			<li id="opOperacoes"><a href="#">Operações</a>
 			<div id="itemOperacoes" class="dropdown-content">
 				<a href="#" onclick="importByNome('somar')">Somar</a>
@@ -37,10 +37,13 @@
 				</a>
 			</li>
 		</ul>
+		<div class="mb-5" style="margin-top: -50px; text-align: center; color: white">
+			<h4>Máquina de Turing</h4>
+		</div>
 		<div id="divCanvas">
 			<canvas class="centraliza" id="fita" width="1350" height="62"></canvas>
 		</div>
-		<div class="mb-4" id="divTriangulo">
+		<div id="divTriangulo">
 			<canvas class="centraliza" style="margin-top: -2.5%;" id="triangulo" width="40" height="50"></canvas>
 			<div style="text-align: center">
 				<h4 >Estado atual: </h4><h4 id="estadoAtual"></h4>
