@@ -168,29 +168,29 @@ function getMatriz(){
     for (let i = 0; i < linhas.childElementCount; i++) {
     
         let coluna = new Map();
-        let estadoAnteriorFinal;
+        let todosVazios = true;
         for (let j = 1; j < cabecalho.childElementCount; j++) {
 
             try{
                 let estado = getEstado(chavesLinhas, chavesCabecalho, linhas.children[i].cells[j].children[0].value);
 
-                if(j == 1){
-                    estadoAnteriorFinal = estado.isFinal;
-                }else{
-                    if(estado.isFinal && !estadoAnteriorFinal){
-                        throw 'Transição incompleta'; 
-                    }
-                }
-
+                todosVazios = todosVazios && estado.isVazio;
+                
                 coluna.set(chavesCabecalho[j - 1], estado); 
             }catch(e){
                 throw 'Erro: ' + e + '. Em: E -> ' + chavesLinhas[i] + ' | C -> ' + chavesCabecalho[j - 1];
             }
         }
 
+        //Se todos vazios for verdadeiro, siginifica que é um estado final, logo deve-se marcar todos os itens como final
+        if(todosVazios){
+            for (let [k, v] of coluna) {
+                v.isFinal = true;
+            }
+        }
+
         matriz.set(chavesLinhas[i], coluna);
     }
-
     return matriz;
 }
 
@@ -198,7 +198,7 @@ function getEstado(chavesLinhas, chavesCabecalho, celula){
     celula = celula.trim();
 
     if(!celula){
-        return {isFinal: true};
+        return {isVazio: true};
     }
 
     let estadoSplit = celula.split(',');
