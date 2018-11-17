@@ -354,7 +354,7 @@ function importByNome(nome){
 
         importTabela(div);
     }else if (nome === 'igualar'){
-        let igual = [13];
+        let igual = [14];
 
         igual[0] = ['Q', '*', '_', 'Y', '>'];
         igual[1] = ['>', '', '', '', '0, >, D'];
@@ -367,8 +367,9 @@ function importByNome(nome){
         igual[8] = ['6', '7, Y, D', '7, Y, D', '6, Y, D', ''];
         igual[9] = ['7', '7, *, D', '8, _, E', '', ''];
         igual[10] = ['8', '8, _, E', '8, _, E', '8, *, E', '9, >, D'];
-        igual[11] = ['9', 'FIM, *, E', '', '', ''];
-        igual[12] = ['FIM', '', '', '', '', ''];
+        igual[11] = ['9', 'FIM, *, E', '10, _, D', '', ''];
+	igual[12] = ['10', '', 'FIM, _, E', '', '', '']
+        igual[13] = ['FIM', '', '', '', '', ''];
 
         importTabela(igual);
     }
